@@ -1,11 +1,12 @@
 import React from 'react';
 import {Routes, Route, Navigate} from "react-router-dom";
 import {privateRoutes, publicRoutes, RouteNames} from "../router";
+import {useTypedSelector} from "../hooks/useTypedSelector";
 
 const AppRouter = () => {
-    const auth = true
+    const {isAuth} = useTypedSelector(state => state.auth)
     return (
-        auth === true
+        isAuth
             ?
             <Routes>
                 {
@@ -19,7 +20,7 @@ const AppRouter = () => {
                 }
                 <Route
                     path="*"
-                    element={  <Navigate to={RouteNames.LOGIN} replace/>}
+                    element={<Navigate to={RouteNames.EVENT}/>}
                 />
             </Routes>
             :
@@ -35,7 +36,7 @@ const AppRouter = () => {
                 }
                 <Route
                     path="*"
-                    element={  <Navigate to={RouteNames.LOGIN} replace/>}
+                    element={<Navigate to={RouteNames.LOGIN}/>}
                 />
             </Routes>
     );
